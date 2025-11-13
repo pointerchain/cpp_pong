@@ -1,9 +1,11 @@
-#include <iostream>
-#include <print>
+// main.cpp
+
+#include "game.hpp"
 
 int main() {
-  std::println("Hello, World!");
+  Game game{};
 
-  std::cin.get();
+  game.Run();
+
   return 0;
 }

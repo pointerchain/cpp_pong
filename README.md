@@ -1,6 +1,6 @@
-# CPP Project Name 
+# CPP Pong
 
-> A short description.
+> A simple Pong game written in C++ using SFML and EnTT.
 
 ## Requirements
 
@@ -14,12 +14,5 @@
 ```bash
 cmake --preset default
 cmake --build --preset default
-build/default/ProjectName
-```
-
-## Example
-
-```bash
-$ ./build/default/ProjectName
-Hello, World!
+build/default/cpp_pong
 ```
