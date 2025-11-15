@@ -1,4 +1,4 @@
-// physics.hpp
+// include/components/physics.hpp
 
 #pragma once
 
@@ -8,6 +8,6 @@ struct Position {
 };
 
 struct Velocity {
-  float x;
-  float y;
+  float dx;
+  float dy;
 };

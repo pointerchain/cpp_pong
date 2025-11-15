@@ -1,4 +1,4 @@
-// cleanup_system.cpp
+// src/systems/cleanup_system.cpp
 
 #include "systems/cleanup_system.hpp"
 

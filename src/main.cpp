@@ -1,4 +1,4 @@
-// main.cpp
+// src/main.cpp
 
 #include "game.hpp"
 

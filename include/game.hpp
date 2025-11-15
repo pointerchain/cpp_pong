@@ -1,4 +1,4 @@
-// game.hpp
+// include/game.hpp
 
 #pragma once
 

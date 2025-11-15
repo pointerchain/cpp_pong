@@ -1,4 +1,4 @@
-// game.cpp
+// src/game.cpp
 
 #include "game.hpp"
 
@@ -12,6 +12,7 @@
 #include "systems/border_check_system.hpp"
 #include "systems/cleanup_system.hpp"
 #include "systems/event_system.hpp"
+#include "systems/paddle_movement_system.hpp"
 #include "systems/physics_system.hpp"
 #include "systems/render_system.hpp"
 
@@ -48,12 +49,18 @@ void Game::Run() {
                               window_.getSize().y / 2);
   registry_.emplace<Velocity>(right_paddle_entity, 0, 0);
 
+  PaddleMovementSystem paddle_movement_system(registry_, dispatcher_);
+
   while (window_.isOpen()) {
     const auto dt = clock.restart().asSeconds();
 
     EventSystem(registry_);
+
     PhysicsSystem(registry_, dt);
     BorderCheckSystem(registry_);
+
+    dispatcher_.update();
+
     RenderSystem(registry_);
     CleanupSystem(registry_);
   }

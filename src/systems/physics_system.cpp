@@ -1,4 +1,4 @@
-// physics_system.cpp
+// src/systems/physics_system.cpp
 
 #include "systems/physics_system.hpp"
 
@@ -6,7 +6,7 @@
 
 void PhysicsSystem(entt::registry &registry, const float dt) {
   for (auto [entity, position, velocity] : registry.view<Position, const Velocity>().each()) {
-    position.x += velocity.x * dt;
-    position.y += velocity.y * dt;
+    position.x += velocity.dx * dt;
+    position.y += velocity.dy * dt;
   }
 }

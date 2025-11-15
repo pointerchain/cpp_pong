@@ -1,4 +1,4 @@
-// border_check_system.cpp
+// src/systems/border_check_system.cpp
 
 #include "systems/border_check_system.hpp"
 
@@ -29,24 +29,24 @@ void BorderCheckSystem(entt::registry& registry) {
     if (position.x - half_width < 0) {
       position.x = half_width;
       if (is_ball) {
-        velocity.x = std::abs(velocity.x);
+        velocity.dx = std::abs(velocity.dx);
       }
     } else if (position.x + half_width > window.getSize().x) {
       position.x = window.getSize().x - half_width;
       if (is_ball) {
-        velocity.x = -std::abs(velocity.x);
+        velocity.dx = -std::abs(velocity.dx);
       }
     }
 
     if (position.y - half_height < 0) {
       position.y = half_height;
       if (is_ball) {
-        velocity.y = std::abs(velocity.y);
+        velocity.dy = std::abs(velocity.dy);
       }
     } else if (position.y + half_height > window.getSize().y) {
       position.y = window.getSize().y - half_height;
       if (is_ball) {
-        velocity.y = -std::abs(velocity.y);
+        velocity.dy = -std::abs(velocity.dy);
       }
     }
   }

@@ -1,4 +1,4 @@
-// to_destroy.hpp
+// include/components/to_destroy.hpp
 
 #pragma once
 
