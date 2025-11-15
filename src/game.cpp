@@ -32,9 +32,8 @@ void Game::Run() {
   PaddleMovementSystem paddle_movement_system(registry_, dispatcher_);
   ScoreSystem score_system(registry_, dispatcher_);
 
-  Factory factory(window_, registry_);
-  factory.SpawnPaddles();
-  factory.SpawnBall();
+  factory_.SpawnPaddles();
+  factory_.SpawnBall();
 
   while (window_.isOpen()) {
     const auto dt = clock_.restart().asSeconds();
