@@ -1,0 +1,13 @@
+// physics.hpp
+
+#pragma once
+
+struct Position {
+  float x;
+  float y;
+};
+
+struct Velocity {
+  float x;
+  float y;
+};

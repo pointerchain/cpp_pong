@@ -11,6 +11,10 @@ find_package(EnTT CONFIG REQUIRED)
 add_executable(${PROJECT_NAME}
     src/main.cpp
     src/game.cpp
+    src/systems/event_system.cpp
+    src/systems/physics_system.cpp
+    src/systems/border_check_system.cpp
+    src/systems/render_system.cpp
     src/systems/cleanup_system.cpp
 )
 
