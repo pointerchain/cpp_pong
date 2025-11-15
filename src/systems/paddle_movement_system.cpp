@@ -6,6 +6,7 @@
 
 #include "components/physics.hpp"
 #include "components/pong.hpp"
+#include "config.hpp"
 #include "events/input_event.hpp"
 
 PaddleMovementSystem::PaddleMovementSystem(entt::registry& registry, entt::dispatcher& dispatcher)
@@ -19,6 +20,6 @@ void PaddleMovementSystem::OnPaddleMove(const PaddleMoveEvent& paddle_move_event
       continue;
     }
 
-    velocity.dy = paddle_move_event.direction * 750;
+    velocity.dy = paddle_move_event.direction * Config::Paddle::kSpeed;
   }
 }

@@ -4,13 +4,17 @@
 
 #include <SFML/Graphics.hpp>
 #include <cstdlib>
+#include <optional>
 
 #include "components/geometry.hpp"
 #include "components/physics.hpp"
 #include "components/pong.hpp"
+#include "components/to_destroy.hpp"
+#include "events/score_event.hpp"
 
 void BorderCheckSystem(entt::registry& registry) {
   auto& window = registry.ctx().get<sf::RenderWindow&>();
+  auto& dispatcher = registry.ctx().get<entt::dispatcher&>();
 
   for (auto [entity, position, velocity] : registry.view<Position, Velocity>().each()) {
     const bool is_ball = registry.all_of<Ball>(entity);
@@ -26,15 +30,17 @@ void BorderCheckSystem(entt::registry& registry) {
       half_height = size->y / 2.0f;
     }
 
+    std::optional<PaddleSide> scoring_paddle_side;
+
     if (position.x - half_width < 0) {
       position.x = half_width;
       if (is_ball) {
-        velocity.dx = std::abs(velocity.dx);
+        scoring_paddle_side = PaddleSide::Right;
       }
     } else if (position.x + half_width > window.getSize().x) {
       position.x = window.getSize().x - half_width;
       if (is_ball) {
-        velocity.dx = -std::abs(velocity.dx);
+        scoring_paddle_side = PaddleSide::Left;
       }
     }
 
@@ -48,6 +54,11 @@ void BorderCheckSystem(entt::registry& registry) {
       if (is_ball) {
         velocity.dy = -std::abs(velocity.dy);
       }
+    }
+
+    if (scoring_paddle_side) {
+      dispatcher.enqueue<ScoreEvent>({*scoring_paddle_side});
+      registry.emplace<ToDestroy>(entity);
     }
   }
 }

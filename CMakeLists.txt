@@ -11,12 +11,16 @@ find_package(EnTT CONFIG REQUIRED)
 add_executable(${PROJECT_NAME}
     src/main.cpp
     src/game.cpp
+    src/factory.cpp
 
     src/systems/paddle_movement_system
-    
+    src/systems/score_system
+
     src/systems/event_system.cpp
+    src/systems/ball_system.cpp
     src/systems/physics_system.cpp
     src/systems/border_check_system.cpp
+    src/systems/collision_system.cpp
     src/systems/render_system.cpp
     src/systems/cleanup_system.cpp
 )

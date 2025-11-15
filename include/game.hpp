@@ -7,6 +7,8 @@
 
 class Game {
  public:
+  Game();
+
   void Run();
 
  private:
@@ -14,4 +16,5 @@ class Game {
                            sf::Style::Titlebar | sf::Style::Close};
   entt::registry registry_{};
   entt::dispatcher dispatcher_{};
+  sf::Clock clock_{};
 };

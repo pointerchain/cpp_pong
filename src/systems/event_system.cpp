@@ -18,6 +18,10 @@ void EventSystem(entt::registry& registry) {
       dispatcher.enqueue<PaddleMoveEvent>({PaddleSide::Left, -1});
     } else if (key_pressed.scancode == sf::Keyboard::Scancode::S) {
       dispatcher.enqueue<PaddleMoveEvent>({PaddleSide::Left, 1});
+    } else if (key_pressed.scancode == sf::Keyboard::Scancode::Up) {
+      dispatcher.enqueue<PaddleMoveEvent>({PaddleSide::Right, -1});
+    } else if (key_pressed.scancode == sf::Keyboard::Scancode::Down) {
+      dispatcher.enqueue<PaddleMoveEvent>({PaddleSide::Right, 1});
     }
   };
   const auto keyRelease = [&](const sf::Event::KeyReleased& key_released) {
@@ -32,6 +36,18 @@ void EventSystem(entt::registry& registry) {
         dispatcher.enqueue<PaddleMoveEvent>({PaddleSide::Left, -1});
       } else {
         dispatcher.enqueue<PaddleMoveEvent>({PaddleSide::Left, 0});
+      }
+    } else if (key_released.scancode == sf::Keyboard::Scancode::Up) {
+      if (sf::Keyboard::isKeyPressed(sf::Keyboard::Scancode::Down)) {
+        dispatcher.enqueue<PaddleMoveEvent>({PaddleSide::Right, 1});
+      } else {
+        dispatcher.enqueue<PaddleMoveEvent>({PaddleSide::Right, 0});
+      }
+    } else if (key_released.scancode == sf::Keyboard::Scancode::Down) {
+      if (sf::Keyboard::isKeyPressed(sf::Keyboard::Scancode::Up)) {
+        dispatcher.enqueue<PaddleMoveEvent>({PaddleSide::Right, -1});
+      } else {
+        dispatcher.enqueue<PaddleMoveEvent>({PaddleSide::Right, 0});
       }
     }
   };

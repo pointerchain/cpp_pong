@@ -5,7 +5,7 @@
 #include "components/physics.hpp"
 
 void PhysicsSystem(entt::registry &registry, const float dt) {
-  for (auto [entity, position, velocity] : registry.view<Position, const Velocity>().each()) {
+  for (auto [entity, position, velocity] : registry.view<Position, Velocity>().each()) {
     position.x += velocity.dx * dt;
     position.y += velocity.dy * dt;
   }
