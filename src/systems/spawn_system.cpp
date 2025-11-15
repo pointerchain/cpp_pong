@@ -9,8 +9,7 @@
 #include "factory.hpp"
 
 void SpawnSystem(entt::registry& registry) {
-  auto& window = registry.ctx().get<sf::RenderWindow&>();
-  Factory factory(window, registry);
+  auto& factory = registry.ctx().get<Factory&>();
 
   for (const auto& entity : registry.view<SpawnBallRequest>()) {
     factory.SpawnBall();

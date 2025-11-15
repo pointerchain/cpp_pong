@@ -25,6 +25,7 @@ Game::Game() {
 
   registry_.ctx().emplace<sf::RenderWindow&>(window_);
   registry_.ctx().emplace<entt::dispatcher&>(dispatcher_);
+  registry_.ctx().emplace<Factory&>(factory_);
 }
 
 void Game::Run() {

@@ -6,6 +6,7 @@
 #include <entt/entt.hpp>
 
 #include "config.hpp"
+#include "factory.hpp"
 
 class Game {
  public:
@@ -20,4 +21,5 @@ class Game {
   entt::registry registry_{};
   entt::dispatcher dispatcher_{};
   sf::Clock clock_{};
+  Factory factory_{window_, registry_};
 };

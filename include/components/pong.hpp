@@ -13,7 +13,7 @@ struct Paddle {
 
 struct Ball {
   BallState ball_state{BallState::Spawning};
-  float state_timer{Config::Ball::kSpawnTimer};
+  float state_timer{Config::Ball::kSpawnStallTimer};
 };
 
 struct SpawnBallRequest {};
