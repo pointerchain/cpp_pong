@@ -15,6 +15,7 @@
 #include "systems/physics_system.hpp"
 #include "systems/render_system.hpp"
 #include "systems/score_system.hpp"
+#include "systems/spawn_system.hpp"
 
 Game::Game() {
   sf::VideoMode desktop = sf::VideoMode::getDesktopMode();
@@ -39,6 +40,7 @@ void Game::Run() {
 
     EventSystem(registry_);
 
+    SpawnSystem(registry_);
     BallSystem(registry_, dt);
     PhysicsSystem(registry_, dt);
     BorderCheckSystem(registry_);

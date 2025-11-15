@@ -7,7 +7,6 @@
 
 #include "components/pong.hpp"
 #include "events/score_event.hpp"
-#include "factory.hpp"
 
 ScoreSystem::ScoreSystem(entt::registry& registry, entt::dispatcher& dispatcher)
     : registry_(registry) {
@@ -15,16 +14,14 @@ ScoreSystem::ScoreSystem(entt::registry& registry, entt::dispatcher& dispatcher)
 }
 
 void ScoreSystem::OnScore(const ScoreEvent& score_event) {
-  auto& window = registry_.ctx().get<sf::RenderWindow&>();
-
   if (score_event.scoring_paddle_side == PaddleSide::Left) {
     ++left_score_;
   } else {
     ++right_score_;
   }
 
-  std::println("{} | {}", left_score_, right_score_);
+  const auto spawn_ball_request_entity = registry_.create();
+  registry_.emplace<SpawnBallRequest>(spawn_ball_request_entity);
 
-  Factory factory(window, registry_);
-  factory.SpawnBall();
+  std::println("{} | {}", left_score_, right_score_);
 }
