@@ -2,6 +2,7 @@
 
 #pragma once
 
+#include <sys/types.h>
 namespace Config {
 
 namespace Window {
@@ -24,9 +25,17 @@ namespace Ball {
 
 constexpr float kInitialSpeed{1250.f};
 constexpr float kAccelerationSpeed{15.f};
-constexpr float kRadius{25.f};
+constexpr float kRadius{20.f};
 constexpr float kSpawnStallTimer{1.f};
 
 }  // namespace Ball
+
+namespace ScoreUi {
+
+constexpr uint kCharacterSize{100};
+constexpr const char* kFontPath{"assets/ARIAL.TTF"};
+constexpr const char* kTextFormat{"{}    |    {}"};
+
+}  // namespace ScoreUi
 
 }  // namespace Config

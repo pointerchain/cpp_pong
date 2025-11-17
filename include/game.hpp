@@ -5,6 +5,7 @@
 #include <SFML/Graphics.hpp>
 #include <entt/entt.hpp>
 
+#include "components/pong.hpp"
 #include "config.hpp"
 #include "factory.hpp"
 
@@ -22,4 +23,5 @@ class Game {
   entt::dispatcher dispatcher_{};
   sf::Clock clock_{};
   Factory factory_{window_, registry_};
+  GameScore game_score_{0, 0};
 };

@@ -3,25 +3,22 @@
 #include "systems/score_system.hpp"
 
 #include <entt/entt.hpp>
-#include <print>
 
 #include "components/pong.hpp"
 #include "events/score_event.hpp"
 
-ScoreSystem::ScoreSystem(entt::registry& registry, entt::dispatcher& dispatcher)
-    : registry_(registry) {
+ScoreSystem::ScoreSystem(entt::registry& registry, entt::dispatcher& dispatcher,
+                         GameScore& game_score)
+    : registry_(registry), game_score_(game_score) {
   dispatcher.sink<ScoreEvent>().connect<&ScoreSystem::OnScore>(this);
 }
 
 void ScoreSystem::OnScore(const ScoreEvent& score_event) {
   if (score_event.scoring_paddle_side == PaddleSide::Left) {
-    ++left_score_;
+    ++game_score_.left;
   } else {
-    ++right_score_;
+    ++game_score_.right;
   }
 
-  const auto spawn_ball_request_entity = registry_.create();
-  registry_.emplace<SpawnBallRequest>(spawn_ball_request_entity);
-
-  std::println("{} | {}", left_score_, right_score_);
+  registry_.emplace<SpawnBallRequest>(registry_.create());
 }

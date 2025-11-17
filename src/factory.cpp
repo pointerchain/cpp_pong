@@ -8,6 +8,7 @@
 #include "components/geometry.hpp"
 #include "components/physics.hpp"
 #include "components/pong.hpp"
+#include "components/ui.hpp"
 #include "config.hpp"
 
 Factory::Factory(const sf::RenderWindow &window, entt::registry &registry)
@@ -38,4 +39,12 @@ void Factory::SpawnBall() {
   registry_.emplace<Radius>(ball_entity, Config::Ball::kRadius);
   registry_.emplace<Position>(ball_entity, window_.getSize().x / 2, window_.getSize().y / 2);
   registry_.emplace<Velocity>(ball_entity, 0, 0);
+}
+
+void Factory::SpawnScoreUi() {
+  const auto score_ui_entity = registry_.create();
+  registry_.emplace<Drawable>(score_ui_entity);
+  registry_.emplace<Position>(score_ui_entity, window_.getSize().x / 2, 175);
+  registry_.emplace<ScoreUi>(score_ui_entity, Config::ScoreUi::kCharacterSize,
+                             std::string(Config::ScoreUi::kTextFormat));
 }

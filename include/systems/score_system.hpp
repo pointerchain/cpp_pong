@@ -4,15 +4,14 @@
 
 #include <entt/entt.hpp>
 
+#include "components/pong.hpp"
 #include "events/score_event.hpp"
 
 struct ScoreSystem {
-  int left_score_{};
-  int right_score_{};
-
   entt::registry& registry_;
+  GameScore& game_score_;
 
-  ScoreSystem(entt::registry& registry, entt::dispatcher& dispatcher);
+  ScoreSystem(entt::registry& registry, entt::dispatcher& dispatcher, GameScore& game_score);
 
   void OnScore(const ScoreEvent& score_event);
 };

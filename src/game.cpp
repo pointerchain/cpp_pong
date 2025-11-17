@@ -4,7 +4,10 @@
 
 #include <SFML/Graphics.hpp>
 #include <entt/entt.hpp>
+#include <stdexcept>
 
+#include "components/pong.hpp"
+#include "config.hpp"
 #include "factory.hpp"
 #include "systems/ball_system.hpp"
 #include "systems/border_check_system.hpp"
@@ -26,14 +29,22 @@ Game::Game() {
   registry_.ctx().emplace<sf::RenderWindow&>(window_);
   registry_.ctx().emplace<entt::dispatcher&>(dispatcher_);
   registry_.ctx().emplace<Factory&>(factory_);
+  registry_.ctx().emplace<GameScore&>(game_score_);
+
+  sf::Font font;
+  if (!font.openFromFile(Config::ScoreUi::kFontPath)) {
+    throw std::runtime_error("Failed to load font: " + std::string(Config::ScoreUi::kFontPath));
+  }
+  registry_.ctx().emplace<sf::Font>(font);
 }
 
 void Game::Run() {
   PaddleMovementSystem paddle_movement_system(registry_, dispatcher_);
-  ScoreSystem score_system(registry_, dispatcher_);
+  ScoreSystem score_system(registry_, dispatcher_, game_score_);
 
+  factory_.SpawnScoreUi();
   factory_.SpawnPaddles();
-  factory_.SpawnBall();
+  registry_.emplace<SpawnBallRequest>(registry_.create());
 
   while (window_.isOpen()) {
     const auto dt = clock_.restart().asSeconds();

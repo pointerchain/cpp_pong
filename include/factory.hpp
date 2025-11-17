@@ -11,6 +11,7 @@ class Factory {
 
   void SpawnPaddles();
   void SpawnBall();
+  void SpawnScoreUi();
 
  private:
   const sf::RenderWindow &window_;

@@ -17,3 +17,8 @@ struct Ball {
 };
 
 struct SpawnBallRequest {};
+
+struct GameScore {
+  int left;
+  int right;
+};
